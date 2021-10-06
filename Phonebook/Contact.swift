@@ -10,10 +10,10 @@ import Foundation
 // Defining a struct to store a contact's details
 
 struct Contact: Codable {
-    var name: String
-    var surname: String
+//    var name: String
+//    var surname: String
     var phone: String
     var email: String
-    var detailPicture: String
-    var previewPicture: String
+//    var detailPicture: String
+//    var previewPicture: String
 }
