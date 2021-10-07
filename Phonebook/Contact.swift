@@ -30,6 +30,6 @@ struct Name: Codable {
 
 struct Picture: Codable {
     var large: String
-    var  medium: String
+    var medium: String
     var thumbnail: String
 }

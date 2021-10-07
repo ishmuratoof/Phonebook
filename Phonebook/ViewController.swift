@@ -26,6 +26,8 @@ class ViewController: UITableViewController {
         }
     }
     
+    // A finction to parse data from URL
+    
     func parse(json: Data) {
         let decoder = JSONDecoder()
         
@@ -35,14 +37,32 @@ class ViewController: UITableViewController {
         }
     }
     
+    // Setting a number of rows in tableView
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contacts.count
     }
     
+    // Filling a cell with information
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Contact", for: indexPath)
+        
+        // Getting information for each contact
+        
         let contact = contacts[indexPath.row]
+        
+        // Getting an image from URL
+        
+        let imageUrl = URL(string: contact.picture.thumbnail)!
+        let imageData = try! Data(contentsOf: imageUrl)
+        let image = UIImage(data: imageData)
+        
+        // Setting information for a cell
+        
         cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
+        cell.imageView?.image = image
+        
         return cell
     }
 }
