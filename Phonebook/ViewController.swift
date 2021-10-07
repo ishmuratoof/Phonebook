@@ -9,7 +9,11 @@ import UIKit
 
 class ViewController: UITableViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var contacts = [Contact]()
+    var searchedContacts = [Contact]()
+    var searching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +44,11 @@ class ViewController: UITableViewController {
     // Setting a number of rows in tableView
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        if searching {
+            return searchedContacts.count
+        } else {
+            return contacts.count
+        }
     }
     
     // Filling a cell with information
@@ -64,6 +72,23 @@ class ViewController: UITableViewController {
         cell.imageView?.image = image
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            let contact = contacts[indexPath.row]
+            
+            let imageUrl = URL(string: contact.picture.large)!
+            let imageData = try! Data(contentsOf: imageUrl)
+            let image = UIImage(data: imageData)
+            
+            vc.userName?.text = "\(contact.name.first) \(contact.name.last)"
+            vc.phone?.text = contact.phone
+            vc.email?.text = contact.email
+            vc.userImage?.image = image
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
