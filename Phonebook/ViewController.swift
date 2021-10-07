@@ -17,7 +17,7 @@ class ViewController: UITableViewController {
         title = "Справочник"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let urlString = "https://randomuser.me/api/?results=10&inc=email,phone"
+        let urlString = "https://randomuser.me/api/?results=1000&inc=name,email,phone,picture"
         
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
@@ -42,7 +42,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Contact", for: indexPath)
         let contact = contacts[indexPath.row]
-        cell.textLabel?.text = "\(contact.email) \(contact.phone)"
+        cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
         return cell
     }
 }

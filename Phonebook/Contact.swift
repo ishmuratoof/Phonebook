@@ -7,21 +7,29 @@
 
 import Foundation
 
-// Defining a struct to store a contact's details
+// Defining a structure to store an array of results
 
-struct Contact: Codable {
-    var phone: String
-    var email: String
-//    var names: Name
-//    var pictures: Picture
+struct Contacts: Codable {
+    var results: [Contact]
 }
 
-//struct Name: Codable {
-//    var first: String
-//    var second: String
-//}
-//
-//struct Picture: Codable {
-//    var large: String
-//    var thumbnail: String
-//}
+// Defining structures to store a contact's details
+
+struct Contact: Codable {
+    var name: Name
+    var email: String
+    var phone: String
+    var picture: Picture
+}
+
+struct Name: Codable {
+    var title: String
+    var first: String
+    var last: String
+}
+
+struct Picture: Codable {
+    var large: String
+    var  medium: String
+    var thumbnail: String
+}
