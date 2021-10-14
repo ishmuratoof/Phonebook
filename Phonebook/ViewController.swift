@@ -76,6 +76,11 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            let contact = contacts[indexPath.row]
+
+            vc.userName?.text = "\(contact.name.first) \(contact.name.last)"
+            vc.phone?.text = contact.phone
+            vc.email?.text = contact.email
             
             navigationController?.pushViewController(vc, animated: true)
         }
