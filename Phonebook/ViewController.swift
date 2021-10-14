@@ -62,30 +62,20 @@ class ViewController: UITableViewController {
         
         // Getting an image from URL
         
-        let imageUrl = URL(string: contact.picture.thumbnail)!
-        let imageData = try! Data(contentsOf: imageUrl)
-        let image = UIImage(data: imageData)
+//        let imageUrl = URL(string: contact.picture.thumbnail)!
+//        let imageData = try! Data(contentsOf: imageUrl)
+//        let image = UIImage(data: imageData)
         
         // Setting information for a cell
         
         cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
-        cell.imageView?.image = image
+//        cell.imageView?.image = image
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            let contact = contacts[indexPath.row]
-            
-            let imageUrl = URL(string: contact.picture.large)!
-            let imageData = try! Data(contentsOf: imageUrl)
-            let image = UIImage(data: imageData)
-            
-            vc.userName?.text = "\(contact.name.first) \(contact.name.last)"
-            vc.phone?.text = contact.phone
-            vc.email?.text = contact.email
-            vc.userImage?.image = image
             
             navigationController?.pushViewController(vc, animated: true)
         }
