@@ -52,7 +52,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eD4-GI-nM4">
                                         <rect key="frame" x="0.0" y="150.66666666666666" width="330" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Позвонить"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="phone.fill" catalog="system" title=" Позвонить"/>
+                                        <connections>
+                                            <segue destination="zwU-mG-BH7" kind="show" id="2F1-lq-g8S"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWz-Da-6uz">
                                         <rect key="frame" x="0.0" y="201.66666666666666" width="330" height="30"/>
@@ -60,7 +63,10 @@
                                             <constraint firstAttribute="height" constant="30" id="n1w-U8-ZfV"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Сообщение"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="message.fill" catalog="system" title=" Сообщение"/>
+                                        <connections>
+                                            <segue destination="BSL-dT-5b9" kind="show" id="01t-Ml-eeV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -90,6 +96,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2483.0769230769229" y="83.886255924170612"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Jx5-jX-Ef9">
+            <objects>
+                <viewController id="zwU-mG-BH7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BNB-JT-UGx">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Звоним" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2u-e6-NAc">
+                                <rect key="frame" x="163.33333333333334" y="384.66666666666669" width="63.666666666666657" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9O5-Bf-7XD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="n2u-e6-NAc" firstAttribute="centerY" secondItem="BNB-JT-UGx" secondAttribute="centerY" id="6aT-1h-URj"/>
+                            <constraint firstItem="n2u-e6-NAc" firstAttribute="centerX" secondItem="BNB-JT-UGx" secondAttribute="centerX" id="8hZ-hs-MyF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vaA-R9-nt5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7NQ-Ib-ZTI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3431" y="-218"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MR8-nk-wOJ">
+            <objects>
+                <viewController id="BSL-dT-5b9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7gJ-wi-iUl">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пишем сообщение" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEp-Pn-zYC">
+                                <rect key="frame" x="115.66666666666669" y="384.66666666666669" width="159" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x9K-Hz-2E2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EEp-Pn-zYC" firstAttribute="centerX" secondItem="7gJ-wi-iUl" secondAttribute="centerX" id="Q6L-A1-vgR"/>
+                            <constraint firstItem="EEp-Pn-zYC" firstAttribute="centerY" secondItem="7gJ-wi-iUl" secondAttribute="centerY" id="mKe-tZ-gDf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Y0V-fK-IOW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CtJ-U3-Q5f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3431" y="470"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="h7E-bn-bfZ">
@@ -161,8 +223,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="phone.fill" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
