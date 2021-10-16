@@ -14,10 +14,23 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var email: UILabel!
     
+    var detailedItem: Contact?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        guard let detailedItem = detailedItem else {
+            return
+        }
+
+        let imageUrl = URL(string: detailedItem.picture.large)!
+        let imageData = try! Data(contentsOf: imageUrl)
+        let image = UIImage(data: imageData)
+        
+        userName.text = "\(detailedItem.name.first) \(detailedItem.name.last)"
+        phone.text = detailedItem.phone
+        email.text = detailedItem.email
+        userImage.image = image
     }
     
 

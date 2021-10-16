@@ -82,7 +82,7 @@
                     </view>
                     <connections>
                         <outlet property="email" destination="yB1-P2-bhK" id="mFd-PR-dMv"/>
-                        <outlet property="phone" destination="yB1-P2-bhK" id="JXp-bl-GnR"/>
+                        <outlet property="phone" destination="eSr-SC-oni" id="8yk-0F-GTl"/>
                         <outlet property="userImage" destination="Dhe-N1-kT4" id="emo-lL-g0I"/>
                         <outlet property="userName" destination="t4j-74-Cm4" id="CgL-fj-Z22"/>
                     </connections>
