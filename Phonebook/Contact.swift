@@ -2,16 +2,10 @@
 //  Contact.swift
 //  Phonebook
 //
-//  Created by Камиль on 04.10.2021.
+//  Created by Камиль on 04.12.2021.
 //
 
 import Foundation
-
-// Defining a structure to store an array of results
-
-struct Contacts: Codable {
-    var results: [Contact]
-}
 
 // Defining structures to store a contact's details
 

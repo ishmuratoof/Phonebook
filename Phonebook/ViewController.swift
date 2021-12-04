@@ -13,6 +13,7 @@ class ViewController: UITableViewController {
     
     var contacts = [Contact]()
     var searchedContacts = [Contact]()
+    var contactImage = [UIImage]()
     var searching = false
 
     override func viewDidLoad() {
@@ -20,25 +21,34 @@ class ViewController: UITableViewController {
         
         title = "Справочник"
         navigationController?.navigationBar.prefersLargeTitles = true
-    
         
+        fetchJSON()
+    }
+    
+    func fetchJSON() {
         let urlString = "https://randomuser.me/api/?results=1000&inc=name,email,phone,picture"
         
-        if let url = URL(string: urlString) {
-            if let data = try? Data(contentsOf: url) {
-                parse(json: data)
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let url = URL(string: urlString) {
+                if let data = try? Data(contentsOf: url) {
+                    self.parse(json: data)
+                }
             }
         }
     }
     
-    // A finction to parse data from URL
+    // A function to parse data from URL
     
     func parse(json: Data) {
         let decoder = JSONDecoder()
         
         if let jsonContacts = try? decoder.decode(Contacts.self, from: json) {
             contacts = jsonContacts.results
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } else {
+            print("Something went wrong")
         }
     }
     
@@ -52,6 +62,8 @@ class ViewController: UITableViewController {
         }
     }
     
+   
+    
     // Filling a cell with information
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,17 +72,14 @@ class ViewController: UITableViewController {
         // Getting information for each contact
         
         let contact = contacts[indexPath.row]
-        
-        // Getting an image from URL
-        
-        let imageUrl = URL(string: contact.picture.thumbnail)!
-        let imageData = try! Data(contentsOf: imageUrl)
-        let image = UIImage(data: imageData)
+//        let image = contactImage[indexPath.row]
         
         // Setting information for a cell
         
+        cell.imageView?.layer.cornerRadius = 5
+        
         cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
-        cell.imageView?.image = image
+//        cell.imageView?.image = image
         
         return cell
     }
