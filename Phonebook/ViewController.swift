@@ -22,34 +22,32 @@ class ViewController: UITableViewController {
         title = "Справочник"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        fetchJSON()
+        loadData()
     }
     
-    func fetchJSON() {
-        let urlString = "https://randomuser.me/api/?results=1000&inc=name,email,phone,picture"
+    func loadData() {
+        guard let url = URL(string: "https://randomuser.me/api/?results=1000&inc=name,email,phone,picture") else {
+            print("Invalid URL")
+            return
+        }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let url = URL(string: urlString) {
-                if let data = try? Data(contentsOf: url) {
-                    self.parse(json: data)
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    if let decodedResponse = try? decoder.decode(Contacts.self, from: data) {
+                        self.contacts = decodedResponse.results
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        return
+                    }
                 }
+                print("Fetch error")
             }
-        }
-    }
-    
-    // A function to parse data from URL
-    
-    func parse(json: Data) {
-        let decoder = JSONDecoder()
-        
-        if let jsonContacts = try? decoder.decode(Contacts.self, from: json) {
-            contacts = jsonContacts.results
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        } else {
-            print("Something went wrong")
-        }
+        }.resume()
     }
     
     // Setting a number of rows in tableView
