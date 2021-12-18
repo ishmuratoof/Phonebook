@@ -14,6 +14,7 @@ class ViewController: UITableViewController {
     var contacts = [Contact]()
     var searchedContacts = [Contact]()
     var contactImage = [UIImage]()
+    var imageURL = [String]()
     var searching = false
 
     override func viewDidLoad() {
@@ -34,21 +35,19 @@ class ViewController: UITableViewController {
         let request = URLRequest(url: url)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.global(qos: .userInitiated).async {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    if let decodedResponse = try? decoder.decode(Contacts.self, from: data) {
+            if let data = data {
+                let decoder = JSONDecoder()
+                if let decodedResponse = try? decoder.decode(Contacts.self, from: data) {
+                    DispatchQueue.main.async {
                         self.contacts = decodedResponse.results
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                        return
+                        self.tableView.reloadData()
                     }
+                    return
                 }
-                print("Fetch error")
             }
+            print("Fetch error")
         }.resume()
-    }
+    } 
     
     // Setting a number of rows in tableView
     
@@ -59,8 +58,6 @@ class ViewController: UITableViewController {
             return contacts.count
         }
     }
-    
-   
     
     // Filling a cell with information
     
@@ -74,7 +71,7 @@ class ViewController: UITableViewController {
         
         // Setting information for a cell
         
-        cell.imageView?.layer.cornerRadius = 5
+//        cell.imageView?.layer.cornerRadius = 5
         
         cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
 //        cell.imageView?.image = image

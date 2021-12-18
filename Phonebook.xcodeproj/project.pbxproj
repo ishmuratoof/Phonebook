@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E216275270B5AC400BF411A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E216274270B5AC400BF411A /* DetailViewController.swift */; };
+		8E9366ED276E394C00AC8099 /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9366EC276E394C00AC8099 /* Name.swift */; };
+		8E9366EF276E395300AC8099 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9366EE276E395300AC8099 /* Picture.swift */; };
 		8EA070D3275B8FD0007568DA /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA070D2275B8FD0007568DA /* Contact.swift */; };
 		8EA070D5275B8FE3007568DA /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA070D4275B8FE3007568DA /* Contacts.swift */; };
 		8EAB541E270A1BE200695FE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB541D270A1BE200695FE8 /* AppDelegate.swift */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		8E216274270B5AC400BF411A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8E9366EC276E394C00AC8099 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
+		8E9366EE276E395300AC8099 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		8EA070D2275B8FD0007568DA /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		8EA070D4275B8FE3007568DA /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		8EAB541A270A1BE200695FE8 /* Phonebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +47,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E9366F0276E399300AC8099 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EA070D2275B8FD0007568DA /* Contact.swift */,
+				8E9366EC276E394C00AC8099 /* Name.swift */,
+				8E9366EE276E395300AC8099 /* Picture.swift */,
+				8EA070D4275B8FE3007568DA /* Contacts.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8E9366F1276E39B200AC8099 /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				8EAB5421270A1BE200695FE8 /* ViewController.swift */,
+				8EAB5423270A1BE200695FE8 /* Main.storyboard */,
+			);
+			path = "Main View";
+			sourceTree = "<group>";
+		};
+		8E9366F2276E39C800AC8099 /* Detail View */ = {
+			isa = PBXGroup;
+			children = (
+				8E216274270B5AC400BF411A /* DetailViewController.swift */,
+			);
+			path = "Detail View";
+			sourceTree = "<group>";
+		};
 		8EAB5411270A1BE200695FE8 = {
 			isa = PBXGroup;
 			children = (
@@ -64,11 +96,9 @@
 			children = (
 				8EAB541D270A1BE200695FE8 /* AppDelegate.swift */,
 				8EAB541F270A1BE200695FE8 /* SceneDelegate.swift */,
-				8EAB5421270A1BE200695FE8 /* ViewController.swift */,
-				8E216274270B5AC400BF411A /* DetailViewController.swift */,
-				8EA070D4275B8FE3007568DA /* Contacts.swift */,
-				8EA070D2275B8FD0007568DA /* Contact.swift */,
-				8EAB5423270A1BE200695FE8 /* Main.storyboard */,
+				8E9366F1276E39B200AC8099 /* Main View */,
+				8E9366F2276E39C800AC8099 /* Detail View */,
+				8E9366F0276E399300AC8099 /* Model */,
 				8EAB5426270A1BE300695FE8 /* Assets.xcassets */,
 				8EAB5428270A1BE300695FE8 /* LaunchScreen.storyboard */,
 				8EAB542B270A1BE300695FE8 /* Info.plist */,
@@ -151,7 +181,9 @@
 				8EAB5422270A1BE200695FE8 /* ViewController.swift in Sources */,
 				8EAB541E270A1BE200695FE8 /* AppDelegate.swift in Sources */,
 				8EAB5420270A1BE200695FE8 /* SceneDelegate.swift in Sources */,
+				8E9366EF276E395300AC8099 /* Picture.swift in Sources */,
 				8E216275270B5AC400BF411A /* DetailViewController.swift in Sources */,
+				8E9366ED276E394C00AC8099 /* Name.swift in Sources */,
 				8EA070D5275B8FE3007568DA /* Contacts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

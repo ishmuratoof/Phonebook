@@ -15,15 +15,3 @@ struct Contact: Codable {
     var phone: String
     var picture: Picture
 }
-
-struct Name: Codable {
-    var title: String
-    var first: String
-    var last: String
-}
-
-struct Picture: Codable {
-    var large: String
-    var medium: String
-    var thumbnail: String
-}
