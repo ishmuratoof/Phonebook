@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E216275270B5AC400BF411A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E216274270B5AC400BF411A /* DetailViewController.swift */; };
 		8E9366ED276E394C00AC8099 /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9366EC276E394C00AC8099 /* Name.swift */; };
 		8E9366EF276E395300AC8099 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9366EE276E395300AC8099 /* Picture.swift */; };
 		8EA070D3275B8FD0007568DA /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA070D2275B8FD0007568DA /* Contact.swift */; };
@@ -18,10 +17,11 @@
 		8EAB5425270A1BE200695FE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB5423270A1BE200695FE8 /* Main.storyboard */; };
 		8EAB5427270A1BE300695FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB5426270A1BE300695FE8 /* Assets.xcassets */; };
 		8EAB542A270A1BE300695FE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB5428270A1BE300695FE8 /* LaunchScreen.storyboard */; };
+		8ED2A87A2797097600DE6504 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2A8782797097600DE6504 /* DetailedViewController.swift */; };
+		8ED2A87B2797097600DE6504 /* DetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED2A8792797097600DE6504 /* DetailedViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8E216274270B5AC400BF411A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8E9366EC276E394C00AC8099 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
 		8E9366EE276E395300AC8099 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		8EA070D2275B8FD0007568DA /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -34,6 +34,8 @@
 		8EAB5426270A1BE300695FE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EAB5429270A1BE300695FE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EAB542B270A1BE300695FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8ED2A8782797097600DE6504 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		8ED2A8792797097600DE6504 /* DetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +72,8 @@
 		8E9366F2276E39C800AC8099 /* Detail View */ = {
 			isa = PBXGroup;
 			children = (
-				8E216274270B5AC400BF411A /* DetailViewController.swift */,
+				8ED2A8782797097600DE6504 /* DetailedViewController.swift */,
+				8ED2A8792797097600DE6504 /* DetailedViewController.xib */,
 			);
 			path = "Detail View";
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			files = (
 				8EAB542A270A1BE300695FE8 /* LaunchScreen.storyboard in Resources */,
 				8EAB5427270A1BE300695FE8 /* Assets.xcassets in Resources */,
+				8ED2A87B2797097600DE6504 /* DetailedViewController.xib in Resources */,
 				8EAB5425270A1BE200695FE8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,7 +186,7 @@
 				8EAB541E270A1BE200695FE8 /* AppDelegate.swift in Sources */,
 				8EAB5420270A1BE200695FE8 /* SceneDelegate.swift in Sources */,
 				8E9366EF276E395300AC8099 /* Picture.swift in Sources */,
-				8E216275270B5AC400BF411A /* DetailViewController.swift in Sources */,
+				8ED2A87A2797097600DE6504 /* DetailedViewController.swift in Sources */,
 				8E9366ED276E394C00AC8099 /* Name.swift in Sources */,
 				8EA070D5275B8FE3007568DA /* Contacts.swift in Sources */,
 			);
