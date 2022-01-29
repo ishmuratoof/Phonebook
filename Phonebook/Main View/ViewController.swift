@@ -11,11 +11,17 @@ class ViewController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
+    enum LoadingState {
+        case loading, loaded
+    }
+    
     var contacts = [Contact]()
     var searchedContacts = [Contact]()
     var contactImage = [UIImage]()
     var imageURL = [String]()
     var searching = false
+    var contactLoadingState: LoadingState = .loading
+    var imageLoadingState: LoadingState = .loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +30,6 @@ class ViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         loadData()
-        loadImage()
-        print(contactImage.count)
     }
     
     // Loading contact data
@@ -49,6 +53,7 @@ class ViewController: UITableViewController {
                         }
                         self.tableView.reloadData()
                     }
+                    self.contactLoadingState = .loaded
                     return
                 }
             }
@@ -58,17 +63,19 @@ class ViewController: UITableViewController {
     
     // Loading contact image
     
-    func loadImage() {
+    func loadImage() {        
         for url in imageURL {
             let pictureURL = URL(string: url)!
             
             let request = URLRequest(url: pictureURL)
-            
+                
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let data = data {
                     DispatchQueue.main.async {
                         self.contactImage.append(UIImage(data: data)!)
                     }
+                    
+                    return
                 }
             }.resume()
         }

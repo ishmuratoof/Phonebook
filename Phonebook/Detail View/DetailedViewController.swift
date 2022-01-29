@@ -9,6 +9,7 @@ import UIKit
 
 class DetailedViewController: UIViewController {
 
+
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numberLabel: UILabel!
