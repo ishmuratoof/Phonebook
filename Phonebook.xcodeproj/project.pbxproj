@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E69C53E2878993200D4D3B0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69C53D2878993200D4D3B0 /* File.swift */; };
 		8E9366ED276E394C00AC8099 /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9366EC276E394C00AC8099 /* Name.swift */; };
 		8E9366EF276E395300AC8099 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9366EE276E395300AC8099 /* Picture.swift */; };
 		8EA070D3275B8FD0007568DA /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA070D2275B8FD0007568DA /* Contact.swift */; };
@@ -18,10 +19,10 @@
 		8EAB5427270A1BE300695FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB5426270A1BE300695FE8 /* Assets.xcassets */; };
 		8EAB542A270A1BE300695FE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB5428270A1BE300695FE8 /* LaunchScreen.storyboard */; };
 		8ED2A87A2797097600DE6504 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2A8782797097600DE6504 /* DetailedViewController.swift */; };
-		8ED2A87B2797097600DE6504 /* DetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED2A8792797097600DE6504 /* DetailedViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E69C53D2878993200D4D3B0 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		8E9366EC276E394C00AC8099 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
 		8E9366EE276E395300AC8099 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		8EA070D2275B8FD0007568DA /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -35,7 +36,6 @@
 		8EAB5429270A1BE300695FE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EAB542B270A1BE300695FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ED2A8782797097600DE6504 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
-		8ED2A8792797097600DE6504 /* DetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E69C53C2878992300D4D3B0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8E69C53D2878993200D4D3B0 /* File.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8E9366F0276E399300AC8099 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				8ED2A8782797097600DE6504 /* DetailedViewController.swift */,
-				8ED2A8792797097600DE6504 /* DetailedViewController.xib */,
 			);
 			path = "Detail View";
 			sourceTree = "<group>";
@@ -102,6 +109,7 @@
 				8E9366F1276E39B200AC8099 /* Main View */,
 				8E9366F2276E39C800AC8099 /* Detail View */,
 				8E9366F0276E399300AC8099 /* Model */,
+				8E69C53C2878992300D4D3B0 /* Extensions */,
 				8EAB5426270A1BE300695FE8 /* Assets.xcassets */,
 				8EAB5428270A1BE300695FE8 /* LaunchScreen.storyboard */,
 				8EAB542B270A1BE300695FE8 /* Info.plist */,
@@ -169,7 +177,6 @@
 			files = (
 				8EAB542A270A1BE300695FE8 /* LaunchScreen.storyboard in Resources */,
 				8EAB5427270A1BE300695FE8 /* Assets.xcassets in Resources */,
-				8ED2A87B2797097600DE6504 /* DetailedViewController.xib in Resources */,
 				8EAB5425270A1BE200695FE8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +195,7 @@
 				8E9366EF276E395300AC8099 /* Picture.swift in Sources */,
 				8ED2A87A2797097600DE6504 /* DetailedViewController.swift in Sources */,
 				8E9366ED276E394C00AC8099 /* Name.swift in Sources */,
+				8E69C53E2878993200D4D3B0 /* File.swift in Sources */,
 				8EA070D5275B8FE3007568DA /* Contacts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
