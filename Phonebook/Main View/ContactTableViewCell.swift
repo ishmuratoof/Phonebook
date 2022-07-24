@@ -9,15 +9,61 @@ import UIKit
 
 class ContactTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var contact: Contact? {
+        didSet {
+            setupUI()
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
+        return imageView
+    }()
 
-        // Configure the view for the selected state
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        setupConstraints()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupUI() {
+        guard let contact = contact else {
+            return
+        }
+
+        nameLabel.text = "\(contact.name.first) \(contact.name.last)"
+
+        NetworkManager.loadImage(for: contact.picture.large) { image in
+            self.profileImageView.image = image
+        }
+    }
+
+    private func setupConstraints() {
+        contentView.addSubview(profileImageView)
+        contentView.addSubview(nameLabel)
+
+        NSLayoutConstraint.activate([
+            profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            profileImageView.widthAnchor.constraint(equalToConstant: 40),
+            profileImageView.heightAnchor.constraint(equalToConstant: 40),
+
+            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10)
+        ])
+    }
 }

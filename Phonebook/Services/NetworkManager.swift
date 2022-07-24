@@ -8,23 +8,25 @@
 import UIKit
 
 final class ContactsFetcher {
-    static func getContacts(completion: @escaping ([Contact]) -> Void) {
+    static func getContacts(completion: @escaping ([Contact], [UIImage?]) -> Void) {
         let url = URL(string: "https://randomuser.me/api/?results=5&inc=name,email,phone,picture")!
+
+        var imagesArray = [UIImage?]()
 
         DispatchQueue.global().async {
             let data = try! Data(contentsOf: url)
             let decoder = JSONDecoder()
             if let decoded = try? decoder.decode(Contacts.self, from: data) {
 
-//                for result in decoded.results {
-//                    let url = URL(string: result.picture.large)!
-//                    let data = try! Data(contentsOf: url)
-//                    let image = UIImage(data: data)
-//                    self.imagesArray.append(image)
-//                }
+                for result in decoded.results {
+                    let url = URL(string: result.picture.large)!
+                    let data = try! Data(contentsOf: url)
+                    let image = UIImage(data: data)
+                    imagesArray.append(image)
+                }
 
                 DispatchQueue.main.async {
-                    completion(decoded.results)
+                    completion(decoded.results, imagesArray)
                 }
             }
         }

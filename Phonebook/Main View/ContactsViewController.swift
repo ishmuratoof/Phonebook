@@ -10,7 +10,9 @@ import UIKit
 class ContactsViewController: UIViewController {
 
     private var tableView = UITableView()
+
     private var contactsArray = [Contact]()
+    private var imagesArray = [UIImage?]()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,14 +21,20 @@ class ContactsViewController: UIViewController {
         setupUI()
         setupConstraints()
 
-        ContactsFetcher.getContacts { contacts in
+        NetworkManager.loadContacts { contacts in
             self.contactsArray = contacts
             self.tableView.reloadData()
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+    }
+
     private func setupTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ContactCell")
+        tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: "ContactCell")
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -34,6 +42,7 @@ class ContactsViewController: UIViewController {
     private func setupUI() {
         title = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
         view.backgroundColor = .background
+        tableView.rowHeight = 50
     }
 
     private func setupConstraints() {
@@ -43,7 +52,7 @@ class ContactsViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -56,9 +65,11 @@ extension ContactsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
-        let contact = contactsArray[indexPath.row]
-        cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
+
+        cell.contact = contactsArray[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
+        
         return cell
     }
 }

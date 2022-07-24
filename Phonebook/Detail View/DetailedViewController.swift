@@ -11,13 +11,13 @@ class DetailedViewController: UIViewController {
 
     var detailedContact: Contact!
 
-    private lazy var imageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 60
-        image.clipsToBounds = true
-        return image
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 60
+        imageView.clipsToBounds = true
+        return imageView
     }()
 
     private lazy var nameLabel: UILabel = {
@@ -67,7 +67,10 @@ class DetailedViewController: UIViewController {
 
         setupUI()
         setupConstraints()
-        loadImage()
+
+        NetworkManager.loadImage(for: detailedContact.picture.large) { image in
+            self.profileImageView.image = image
+        }
     }
 
     private func setupUI() {
@@ -81,7 +84,7 @@ class DetailedViewController: UIViewController {
     }
 
     private func setupConstraints() {
-        view.addSubview(imageView)
+        view.addSubview(profileImageView)
         view.addSubview(nameLabel)
         view.addSubview(emailLabel)
         view.addSubview(numberLabel)
@@ -89,11 +92,11 @@ class DetailedViewController: UIViewController {
         view.addSubview(messageButton)
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -30),
-            imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -30),
+            profileImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
 
             nameLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10),
 
             numberLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             numberLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 30),
@@ -107,17 +110,5 @@ class DetailedViewController: UIViewController {
             messageButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             messageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
-    }
-
-    private func loadImage() {
-        DispatchQueue.global().async {
-            let imageUrl = URL(string: self.detailedContact.picture.large)!
-            let imageData = try! Data(contentsOf: imageUrl)
-            let image = UIImage(data: imageData)
-
-            DispatchQueue.main.async {
-                self.imageView.image = image
-            }
-        }
     }
 }
