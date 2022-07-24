@@ -71,13 +71,6 @@ class DetailedViewController: UIViewController {
     }
 
     private func setupUI() {
-        view.addSubview(imageView)
-        view.addSubview(nameLabel)
-        view.addSubview(emailLabel)
-        view.addSubview(numberLabel)
-        view.addSubview(callButton)
-        view.addSubview(messageButton)
-
         view.backgroundColor = .background
 
         nameLabel.text = "\(detailedContact.name.first) \(detailedContact.name.last)"
@@ -88,6 +81,13 @@ class DetailedViewController: UIViewController {
     }
 
     private func setupConstraints() {
+        view.addSubview(imageView)
+        view.addSubview(nameLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(numberLabel)
+        view.addSubview(callButton)
+        view.addSubview(messageButton)
+        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -30),
             imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
