@@ -11,12 +11,47 @@ class DetailedViewController: UIViewController {
 
     var detailedContact: Contact!
 
-    private var imageView: UIImageView!
-    private var nameLabel: UILabel!
-    private var emailLabel: UILabel!
-    private var numberLabel: UILabel!
-    private var callButton: UIButton!
-    private var messageButton: UIButton!
+    private lazy var imageView: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 60
+        image.clipsToBounds = true
+        return image
+    }()
+
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var numberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var callButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = .tinted()
+        return button
+    }()
+
+    private lazy var messageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = .tinted()
+        return button
+    }()
 
     init(for detailedContact: Contact) {
         super.init(nibName: nil, bundle: nil)
@@ -27,41 +62,32 @@ class DetailedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func loadView() {
-        super.loadView()
-
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        emailLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        numberLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        callButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-
-        view.addSubview(imageView!)
-        view.addSubview(nameLabel!)
-        view.addSubview(numberLabel!)
-        view.addSubview(emailLabel!)
-        view.addSubview(callButton!)
-        view.addSubview(messageButton!)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        setupConstraints()
         loadImage()
     }
 
     private func setupUI() {
+        view.addSubview(imageView)
+        view.addSubview(nameLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(numberLabel)
+        view.addSubview(callButton)
+        view.addSubview(messageButton)
+
         view.backgroundColor = .background
 
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        callButton.translatesAutoresizingMaskIntoConstraints = false
-        messageButton.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.text = "\(detailedContact.name.first) \(detailedContact.name.last)"
+        numberLabel.text = "Phone: \(detailedContact.phone)"
+        emailLabel.text = "Email: \(detailedContact.email)"
+        callButton.setTitle("Call (\(detailedContact.phone))", for: .normal)
+        messageButton.setTitle("Message (\(detailedContact.email))", for: .normal)
+    }
 
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -30),
             imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
@@ -81,20 +107,6 @@ class DetailedViewController: UIViewController {
             messageButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             messageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
-
-        imageView.layer.cornerRadius = 60
-        imageView.clipsToBounds = true
-
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-
-        callButton.configuration = .tinted()
-        messageButton.configuration = .tinted()
-
-        nameLabel.text = "\(detailedContact.name.first) \(detailedContact.name.last)"
-        numberLabel.text = "Phone: \(detailedContact.phone)"
-        emailLabel.text = "Email: \(detailedContact.email)"
-        callButton.setTitle("Call (\(detailedContact.phone))", for: .normal)
-        messageButton.setTitle("Message (\(detailedContact.email))", for: .normal)
     }
 
     private func loadImage() {
