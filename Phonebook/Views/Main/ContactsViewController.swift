@@ -26,7 +26,11 @@ class ContactsViewController: UIViewController {
         setupUI()
         setupConstraints()
 
-        NetworkManager.loadContacts { contacts in
+        NetworkManager.loadContacts { [weak self] contacts in
+            guard let self = self else {
+                return
+            }
+            
             self.contactsArray = contacts
             self.tableView.reloadData()
         }
@@ -98,7 +102,8 @@ extension ContactsViewController: UITableViewDataSource {
 extension ContactsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contact = contactsArray[indexPath.row]
-        let detailedView = DetailedViewController(for: contact)
+        let detailedView = DetailedViewController()
+        detailedView.detailedContact = contact
         navigationController?.pushViewController(detailedView, animated: true)
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class DetailedViewController: UIViewController {
 
-    var detailedContact: Contact!
+    var detailedContact: Contact?
 
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,6 +19,7 @@ class DetailedViewController: UIViewController {
         imageView.layer.borderWidth = 0.1
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
 
@@ -55,34 +56,37 @@ class DetailedViewController: UIViewController {
         return button
     }()
 
-    init(for detailedContact: Contact) {
-        super.init(nibName: nil, bundle: nil)
-        self.detailedContact = detailedContact
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         setupConstraints()
-
-        NetworkManager.loadImage(for: detailedContact.picture.large) { image in
-            self.profileImageView.image = image
-        }
     }
 
     private func setupUI() {
+        guard let detailedContact = detailedContact else {
+            return
+        }
+
         view.backgroundColor = .background
+
+        profileImageView.addGestureRecognizer(tapGesture)
 
         nameLabel.text = "\(detailedContact.name.first) \(detailedContact.name.last)"
         numberLabel.text = "Phone: \(detailedContact.phone)"
         emailLabel.text = "Email: \(detailedContact.email)"
         callButton.setTitle("Call (\(detailedContact.phone))", for: .normal)
         messageButton.setTitle("Message (\(detailedContact.email))", for: .normal)
+
+        NetworkManager.loadImage(for: detailedContact.picture.large) { [weak self] image in
+            guard let self = self else {
+                return
+            }
+            
+            self.profileImageView.image = image
+        }
     }
 
     private func setupConstraints() {
@@ -114,5 +118,25 @@ class DetailedViewController: UIViewController {
             messageButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             messageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
+    }
+
+    @objc private func imageTapped(_ sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        let bigImageView = UIImageView(image: imageView.image)
+        bigImageView.frame = UIScreen.main.bounds
+        bigImageView.backgroundColor = .black
+        bigImageView.contentMode = .scaleAspectFit
+        bigImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        bigImageView.addGestureRecognizer(tap)
+        view.addSubview(bigImageView)
+        navigationController?.isNavigationBarHidden = true
+        tabBarController?.tabBar.isHidden = true
+    }
+
+    @objc private func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        navigationController?.isNavigationBarHidden = false
+        tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
     }
 }

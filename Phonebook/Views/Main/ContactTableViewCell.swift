@@ -17,7 +17,11 @@ class ContactTableViewCell: UITableViewCell {
 
             nameLabel.text = "\(contact.name.first) \(contact.name.last)"
 
-            NetworkManager.loadImage(for: contact.picture.large) { image in
+            NetworkManager.loadImage(for: contact.picture.large) { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
                 self.profileImageView.image = image
             }
         }
