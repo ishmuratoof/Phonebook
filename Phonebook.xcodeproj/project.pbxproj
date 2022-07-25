@@ -78,21 +78,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8E9366F1276E39B200AC8099 /* Main View */ = {
+		8E9366F1276E39B200AC8099 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				8E6180A4288BEB0F00620123 /* ContactsViewController.swift */,
 				8E6180A8288BF71B00620123 /* ContactTableViewCell.swift */,
 			);
-			path = "Main View";
+			path = Main;
 			sourceTree = "<group>";
 		};
-		8E9366F2276E39C800AC8099 /* Detail View */ = {
+		8E9366F2276E39C800AC8099 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				8ED2A8782797097600DE6504 /* DetailedViewController.swift */,
 			);
-			path = "Detail View";
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		8EAB5411270A1BE200695FE8 = {
@@ -116,8 +116,7 @@
 			children = (
 				8EAB541D270A1BE200695FE8 /* AppDelegate.swift */,
 				8EAB541F270A1BE200695FE8 /* SceneDelegate.swift */,
-				8E9366F1276E39B200AC8099 /* Main View */,
-				8E9366F2276E39C800AC8099 /* Detail View */,
+				8EBD67A2288D2DA600519B9B /* Views */,
 				8E6180AA288C007F00620123 /* Services */,
 				8E9366F0276E399300AC8099 /* Model */,
 				8E69C53C2878992300D4D3B0 /* Extensions */,
@@ -126,6 +125,15 @@
 				8EAB542B270A1BE300695FE8 /* Info.plist */,
 			);
 			path = Phonebook;
+			sourceTree = "<group>";
+		};
+		8EBD67A2288D2DA600519B9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E9366F1276E39B200AC8099 /* Main */,
+				8E9366F2276E39C800AC8099 /* Detail */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

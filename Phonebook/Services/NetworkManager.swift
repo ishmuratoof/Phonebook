@@ -9,13 +9,12 @@ import UIKit
 
 final class NetworkManager {
     static func loadContacts(completion: @escaping ([Contact]) -> Void) {
-        let url = URL(string: "https://randomuser.me/api/?results=10&inc=name,email,phone,picture")!
+        let url = URL(string: "https://randomuser.me/api/?results=1000&inc=name,email,phone,picture")!
 
         DispatchQueue.global().async {
             let data = try! Data(contentsOf: url)
             let decoder = JSONDecoder()
             if let decoded = try? decoder.decode(Contacts.self, from: data) {
-
                 DispatchQueue.main.async {
                     completion(decoded.results)
                 }
