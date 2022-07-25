@@ -10,14 +10,19 @@ import UIKit
 class ContactsViewController: UIViewController {
 
     private var tableView = UITableView()
+    private var searchController = UISearchController()
 
     private var contactsArray = [Contact]()
-    private var imagesArray = [UIImage?]()
+    private var searchedContacts = [Contact]()
+    private var isSearching: Bool {
+        return searchController.isActive
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupTableView()
+        setupSearchBar()
         setupUI()
         setupConstraints()
 
@@ -30,19 +35,28 @@ class ContactsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        tableView.reloadData()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
     private func setupTableView() {
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: "ContactCell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = 50
+    }
+
+    private func setupSearchBar() {
+        navigationItem.searchController = searchController
+        searchController.automaticallyShowsCancelButton = true
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search contacts"
     }
 
     private func setupUI() {
         title = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
         view.backgroundColor = .background
-        tableView.rowHeight = 50
     }
 
     private func setupConstraints() {
@@ -51,7 +65,7 @@ class ContactsViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -61,13 +75,20 @@ class ContactsViewController: UIViewController {
 
 extension ContactsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactsArray.count
+        return isSearching ? searchedContacts.count : contactsArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
+        let contact: Contact
 
-        cell.contact = contactsArray[indexPath.row]
+        if isSearching {
+            contact = searchedContacts[indexPath.row]
+        } else {
+            contact = contactsArray[indexPath.row]
+        }
+
+        cell.contact = contact
         cell.accessoryType = .disclosureIndicator
         
         return cell
@@ -79,5 +100,16 @@ extension ContactsViewController: UITableViewDelegate {
         let contact = contactsArray[indexPath.row]
         let detailedView = DetailedViewController(for: contact)
         navigationController?.pushViewController(detailedView, animated: true)
+    }
+}
+
+extension ContactsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+
+        searchedContacts = contactsArray.filter( { $0.name.first.lowercased().contains(text.lowercased()) } )
+        tableView.reloadData()
     }
 }

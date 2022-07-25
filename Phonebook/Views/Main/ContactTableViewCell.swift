@@ -11,7 +11,15 @@ class ContactTableViewCell: UITableViewCell {
 
     var contact: Contact? {
         didSet {
-            setupUI()
+            guard let contact = contact else {
+                return
+            }
+
+            nameLabel.text = "\(contact.name.first) \(contact.name.last)"
+
+            NetworkManager.loadImage(for: contact.picture.large) { image in
+                self.profileImageView.image = image
+            }
         }
     }
 
@@ -20,6 +28,8 @@ class ContactTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
+        imageView.layer.borderWidth = 0.1
+        imageView.layer.borderColor = UIColor.black.cgColor
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -40,18 +50,6 @@ class ContactTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupUI() {
-        guard let contact = contact else {
-            return
-        }
-
-        nameLabel.text = "\(contact.name.first) \(contact.name.last)"
-
-        NetworkManager.loadImage(for: contact.picture.large) { image in
-            self.profileImageView.image = image
-        }
-    }
-
     private func setupConstraints() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(nameLabel)
@@ -63,7 +61,13 @@ class ContactTableViewCell: UITableViewCell {
             profileImageView.heightAnchor.constraint(equalToConstant: 40),
 
             nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10)
+            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
         ])
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        profileImageView.image = UIImage(systemName: "person.circle")
     }
 }
