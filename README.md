@@ -1,3 +1,5 @@
 # Phonebook
 
-An app to display contacts from https://randomuser.me
+App fetches 1000 contacts from https://randomuser.me and displays them in a table view.
+
+
